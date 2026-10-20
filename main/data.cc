@@ -1,27 +1,28 @@
 #include "data.h"
 
-
+#include <filesystem>
 #include <fstream>
-#include <string>
 
 using namespace std;
 
-vector<double> notas;
+const string kCarpeta = "datos";
 
-const string kArchivo = "notas.txt";
+static string Ruta(const string &asignatura) {
+    return kCarpeta + "/" + asignatura + ".txt";
+}
 
-void load() {
-    ifstream entrada(kArchivo);
+void save(const string &asignatura, double nota) {
+    filesystem::create_directory(kCarpeta);
+    ofstream salida(Ruta(asignatura), ios::app);
+    salida << nota << " ";
+}
+
+vector<double> load(const string &asignatura) {
+    vector<double> notas;
+    ifstream entrada(Ruta(asignatura));
     double nota;
     while (entrada >> nota) {
         notas.push_back(nota);
     }
+    return notas;
 }
-
-void save() {
-    ofstream salida(kArchivo);
-    for (double nota : notas) {
-        salida << nota << "\n";
-    }
-}
-

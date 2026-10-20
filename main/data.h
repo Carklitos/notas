@@ -2,10 +2,9 @@
 #define DATA_H
 
 #include <vector>
+#include <string>
 
-extern std::vector<double> notas;
-
-void save();
-void load();
+void save(const std::string &asignatura, double nota);
+std::vector<double> load(const std::string  &asignatura);
 
 #endif

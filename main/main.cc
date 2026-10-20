@@ -5,40 +5,38 @@
 
 //local lib
 
-#include "data.h"
-#include "calc.h"
+#include "cmd.h"
 
 /////////////////////////
 
 using namespace std;
 
 int main(int argc, char **argv) {
-    if (argc < 2) {
-        cerr << "Uso: " << argv[0] << " <cmd> <nota>" << endl;
+    if (argc < 3) {
+        cerr << "Uso: " << argv[0] << " <cmd> <asig> <nota>" << endl;
         return 1;
     }
 
     //var 
-    string command = argv[1]; // add|list
+    string command = argv[1]; // add | list
+    string asignatura = argv[2]; // <asignatura>
 
-    load();
-    
+    // ./main [0] | <cmd> [1] | <asig> [2] | <nota> [3]
 
     if (command == "add") {
-        if (argc != 3 ) {
+        if (argc != 4 ) {
             cerr << "Uso: " << argv[0] << " add <nota>" << endl;
             return 1;
         }
-        double nota = stod(argv[2]);
-        add(nota);
-        save();
+        double nota = stod(argv[3]);
+        add(asignatura, nota);
 
     } else if (command == "list") {
-        if (argc != 2) {
-            cerr << "Uso: " << argv[0] << " list" << endl;
+        if (argc != 3) {
+            cerr << "Uso: " << argv[0] << " list <asig>" << endl;
             return 1; 
         }
-        listar();
+        listar(asignatura);
     } else {
         cerr << "Comando desconocido" << endl;
         return 1;

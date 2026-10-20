@@ -1,0 +1,2 @@
+hay un error con el definir kArchivo con string
+tienes que meter struct asignaturas --> mirar claude
